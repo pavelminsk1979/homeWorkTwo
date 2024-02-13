@@ -29,13 +29,14 @@ describe('/posts',()=>{
             .post('/posts')
             .set('Authorization', `Basic ${loginPasswordBasic64}`)
             .send({title:'titletitletitletitletitletitletitletitle',
-                shortDescription:'111shortDescription',
+                shortDescription:'length_101-DnZlTI1khUHpqOqCzftIYiSHCV8fKjYFQOoCIwmUczzW9V5K8cqY3aPKo3XKwbfrmeWOJyQgGnlX5sP3aW3RlaRSQx',
                 content:'222content',
                 blogId:'333blogId'})
             .expect(STATUS_CODE.CODE_400)
 
         expect(res.body).toEqual({  errorsMessages: [
                 { message: 'Incorrect title', field: 'title' },
+                { message: 'Incorrect shortDescription', field: 'shortDescription' },
             ]})
 
 
@@ -140,12 +141,13 @@ describe('/posts',()=>{
             .put('/posts/'+idNewBlog)
             .set('Authorization', `Basic ${loginPasswordBasic64}`)
             .send({title:'titletitletitletitletitletitletitletitle',
-                shortDescription:'111shortDescription',
+                shortDescription:'length_101-DnZlTI1khUHpqOqCzftIYiSHCV8fKjYFQOoCIwmUczzW9V5K8cqY3aPKo3XKwbfrmeWOJyQgGnlX5sP3aW3RlaRSQx',
                 content:'222content',
                 blogId:'333blogId'})
             .expect(STATUS_CODE.CODE_400)
         expect(res.body).toEqual({  errorsMessages: [
                 { message: 'Incorrect title', field: 'title' },
+                { message: 'Incorrect shortDescription', field: 'shortDescription' },
             ]})
 
         const getRes =await req
