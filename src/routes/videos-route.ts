@@ -19,8 +19,6 @@ import {STATUS_CODE} from "../constant-status-code";
 export const videosRoute = Router({})
 
 
-type RequestWithParamsWithBody<P, B> = Request<P, unknown, B, unknown>
-
 
 videosRoute.get('/', (req: Request, res: Response) => {
     const videos = videosRepository.getVideos()

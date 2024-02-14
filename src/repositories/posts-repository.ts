@@ -2,27 +2,6 @@ import {CreateAndUpdatePostModel} from "../models/CreateAndUpdatePostModel";
 import {DB, Post} from "../db/db";
 
 
-/*type Post = {
-    id: string
-    title: string
-    shortDescription: string
-    content: string
-    blogId: string
-    blogName: string
-}*/
-/*
-export const posts: Post[] = [
-    {
-        id: '77777',
-        title: 'firstPosTtitle',
-        shortDescription: 'firstPostShortDescription',
-        content: 'firstPostContent',
-        blogId: 'firstPostBlogId',
-        blogName: 'firstPostBlogName',
-    }
-]
-*/
-
 
 export const postsRepository = {
     getPosts() {

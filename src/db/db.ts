@@ -17,7 +17,7 @@ export const DB = {
         "title": "video interesting",
         "author": "man",
         "canBeDownloaded": true,
-        "minAgeRestriction": null,
+        "minAgeRestriction": 0,
         "createdAt": "2024-02-01T18:57:08.689Z",
         "publicationDate": "2024-02-01T18:57:08.689Z",
         "availableResolutions": [AvailableResolutions.P144]
@@ -43,14 +43,14 @@ export const DB = {
 }
 
 export type Video = {
-    id?: number;
+    id: number;
     title: string;
     author: string;
-    canBeDownloaded?: boolean ;
-    minAgeRestriction?: number|null ;
-    createdAt?: string;
-    publicationDate?: string;
-    availableResolutions?: AvailableResolutions[];
+    canBeDownloaded: boolean ;
+    minAgeRestriction: number ;
+    createdAt: string;
+    publicationDate: string;
+    availableResolutions: AvailableResolutions[];
 }
 
 export type Blog = {

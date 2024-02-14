@@ -11,10 +11,12 @@ import {shortDescriptionValidationPosts} from "../middlewares/postsMiddlewares/s
 import {contentValidationPosts} from "../middlewares/postsMiddlewares/contentValidationPosts";
 import {blogIdValidationPosts} from "../middlewares/postsMiddlewares/blogIdValidationPosts";
 import {errorValidationBlogs} from "../middlewares/blogsMiddelwares/errorValidationBlogs";
-import {blogsRepository} from "../repositories/blogs-repository";
+import {RequestWithParamsWithBody} from "../types/RequestWithParamsWithBody";
 
 
 export const postsRoute = Router ({})
+
+
 
 const createAndUpdateValidationPosts = ()=>[titleValidationPosts,shortDescriptionValidationPosts,contentValidationPosts,blogIdValidationPosts]
 
@@ -41,15 +43,15 @@ const newPost = postsRepository.createPost(req.body)
 
 
 
-postsRoute.put('/:id', authMiddleware,
+postsRoute.put('/:id',authMiddleware,
     createAndUpdateValidationPosts(),
-    errorValidationBlogs,(req: Request, res: Response) => {
+    errorValidationBlogs,(req: RequestWithParamsWithBody<IdStringGetAndDeleteModel, CreateAndUpdatePostModel>, res: Response) => {
     const isUpdatePost = postsRepository.updatePost(req.params.id,req.body)
         if(isUpdatePost){
             res.sendStatus(STATUS_CODE.CODE_204)
         }else {res.sendStatus(STATUS_CODE.CODE_404)}
     })
-//RequestWithParamsWithBody<IdStringGetAndDeleteModel, CreateAndUpdatePostModel>
+
 
 postsRoute.delete('/:id',authMiddleware,(req: RequestWithParams<IdStringGetAndDeleteModel>, res: Response) => {
     const isPostDelete = postsRepository.deletePostById(req.params.id)

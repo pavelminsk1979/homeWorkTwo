@@ -10,6 +10,7 @@ import {IdStringGetAndDeleteModel} from "../models/IdStringGetAndDeleteModel";
 import {RequestWithBody} from "../types/RequestWithBody";
 import {CreateAndUpdateBlogModel} from "../models/CreateAndUpdateBlogModel";
 import {STATUS_CODE} from "../constant-status-code";
+import {RequestWithParamsWithBody} from "../types/RequestWithParamsWithBody";
 
 
 
@@ -43,8 +44,8 @@ blogsRoute.post('/', authMiddleware,postValidationBlogs(),errorValidationBlogs,(
 })
 
 
-//RequestWithParamsWithBody<IdStringGetAndDeleteModel, CreateAndUpdateBlogModel>
-blogsRoute.put('/:id', authMiddleware,postValidationBlogs(),errorValidationBlogs,(req: Request, res: Response) => {
+
+blogsRoute.put('/:id', authMiddleware,postValidationBlogs(),errorValidationBlogs,(req: RequestWithParamsWithBody<IdStringGetAndDeleteModel, CreateAndUpdateBlogModel>, res: Response) => {
     const isUpdateBlog = blogsRepository.updateBlog(req.params.id,req.body)
     if(isUpdateBlog){
         res.sendStatus(STATUS_CODE.CODE_204)

@@ -1,24 +1,6 @@
 import {CreateAndUpdateBlogModel} from "../models/CreateAndUpdateBlogModel";
 import {Blog, DB} from "../db/db";
 
-/*
-export type Blog = {
-    id: string,
-    name: string,
-    description: string,
-    websiteUrl: string
-}
-*/
-
-/*export const blogs: Blog[] = [
-    {
-        id: '123',
-        name: 'blogName',
-        description: 'blogDescription',
-        websiteUrl: 'blogWebsiteUrl'
-    }
-]*/
-
 
 export const blogsRepository = {
     getBlogs() {
