@@ -1,4 +1,4 @@
-import {AvailableResolutions} from "../repositories/videos-repository";
+import {AvailableResolutions} from "../db/db";
 
 export  type UpdateVideoModel = {
     title: string,
