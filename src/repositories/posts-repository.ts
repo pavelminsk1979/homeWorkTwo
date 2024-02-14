@@ -1,15 +1,16 @@
 import {CreateAndUpdatePostModel} from "../models/CreateAndUpdatePostModel";
-import {blogs} from "./blogs-repository";
+import {DB, Post} from "../db/db";
 
 
-type Post = {
+/*type Post = {
     id: string
     title: string
     shortDescription: string
     content: string
     blogId: string
     blogName: string
-}
+}*/
+/*
 export const posts: Post[] = [
     {
         id: '77777',
@@ -20,15 +21,16 @@ export const posts: Post[] = [
         blogName: 'firstPostBlogName',
     }
 ]
+*/
 
 
 export const postsRepository = {
     getPosts() {
-        return posts
+        return DB.posts
     },
 
     findPostById(id: string) {
-        const post = posts.find(e => e.id === id)
+        const post = DB.posts.find(e => e.id === id)
         return post
     },
 
@@ -44,7 +46,7 @@ export const postsRepository = {
             blogId,
             blogName: 'anyBlogName'
         }
-        posts.push(newPost)
+        DB.posts.push(newPost)
         return newPost
     },
 
@@ -53,7 +55,7 @@ export const postsRepository = {
 
         const {title, blogId, content, shortDescription} = requestBodyPost
 
-        const post = posts.find(e => e.id === id)
+        const post = DB.posts.find(e => e.id === id)
 
         if (post) {
             post.title = title
@@ -68,11 +70,11 @@ export const postsRepository = {
 
 
     deletePostById(id: string) {
-        const indexPost = posts.findIndex(e => e.id === id)
+        const indexPost = DB.posts.findIndex(e => e.id === id)
         if (indexPost === -1) {
             return false
         } else {
-            posts.splice(indexPost, 1)
+            DB.posts.splice(indexPost, 1)
             return true
         }
     }

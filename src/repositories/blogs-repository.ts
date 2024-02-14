@@ -1,30 +1,33 @@
 import {CreateAndUpdateBlogModel} from "../models/CreateAndUpdateBlogModel";
+import {Blog, DB} from "../db/db";
 
+/*
 export type Blog = {
     id: string,
     name: string,
     description: string,
     websiteUrl: string
 }
+*/
 
-export const blogs: Blog[] = [
+/*export const blogs: Blog[] = [
     {
         id: '123',
         name: 'blogName',
         description: 'blogDescription',
         websiteUrl: 'blogWebsiteUrl'
     }
-]
+]*/
 
 
 export const blogsRepository = {
     getBlogs() {
-        return blogs
+        return DB.blogs
     },
 
     findBlogById(id: string) {
         debugger
-        let blog = blogs.find(e => e.id === id)
+        let blog = DB.blogs.find(e => e.id === id)
         return blog
     },
 
@@ -38,13 +41,13 @@ export const blogsRepository = {
             websiteUrl
         }
 
-        blogs.push(newBlog)
+        DB.blogs.push(newBlog)
         return newBlog
     },
 
     updateBlog(id: string, requestBodyBlog: CreateAndUpdateBlogModel) {
         const {name, description, websiteUrl} = requestBodyBlog
-        const blog = blogs.find(e => e.id === id)
+        const blog = DB.blogs.find(e => e.id === id)
         if (blog) {
             blog.name = name
             blog.description = description
@@ -56,11 +59,11 @@ export const blogsRepository = {
     },
 
     deleteBlogById(id: string) {
-        const indexBlog = blogs.findIndex(e => e.id === id)
+        const indexBlog = DB.blogs.findIndex(e => e.id === id)
         if (indexBlog === -1){
             return false
         }else {
-            blogs.splice(indexBlog, 1)
+            DB.blogs.splice(indexBlog, 1)
             return true
         }
 

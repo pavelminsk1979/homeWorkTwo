@@ -1,7 +1,8 @@
 import {CreateVideo} from "../models/CreateVideoModel";
 import {UpdateVideoModel} from "../models/UpdateVideoModel";
+import {DB, Video} from "../db/db";
 
-export enum AvailableResolutions {
+/*export enum AvailableResolutions {
     P144 = 'P144',
     P240 = 'P240',
     P360 = 'P360',
@@ -10,8 +11,9 @@ export enum AvailableResolutions {
     P1080 = 'P1080',
     P1440 = 'P1440',
     P2160 = 'P2160'
-}
+}*/
 
+/*
 export type Video = {
     id?: number;
     title?: string;
@@ -22,9 +24,10 @@ export type Video = {
     publicationDate?: string;
     availableResolutions?: AvailableResolutions[];
 }
+*/
 
 
-export const videos: Video[] = [
+/*export const videos: Video[] = [
     {
         "id": 0,
         "title": "video interesting",
@@ -35,24 +38,24 @@ export const videos: Video[] = [
         "publicationDate": "2024-02-01T18:57:08.689Z",
         "availableResolutions": [AvailableResolutions.P144]
     }
-]
+]*/
 
 export const videosRepository = {
     getVideos() {
-        return videos
+        return DB.videos
     },
 
 
     findVideoById(id: number) {
-        let video = videos.find(e => e.id === id)
+        let video = DB.videos.find(e => e.id === id)
         return video
     },
 
 
     deletVideoById(id: number) {
-        for (let i = 0; i < videos.length; i++) {
-            if (videos[i].id === id) {
-                videos.splice(i, 1)
+        for (let i = 0; i < DB.videos.length; i++) {
+            if (DB.videos[i].id === id) {
+                DB.videos.splice(i, 1)
                 return true
             }
         }
@@ -70,20 +73,20 @@ export const videosRepository = {
             title,
             author,
             canBeDownloaded: false,
-            minAgeRestriction: null,
+            minAgeRestriction: 5 ,
             createdAt: createdAt.toISOString(),
             publicationDate: publicationDate.toISOString(),
             availableResolutions
         }
-
-        videos.push(newVideo)
+//@ts-ignore
+        DB.videos.push(newVideo)
         return newVideo
     },
 
     updateVideo(id:number,requestBody:UpdateVideoModel){
         let {title, author, availableResolutions, minAgeRestriction, canBeDownloaded, publicationDate} = requestBody
 
-        let video = videos.find(e => e.id === id)
+        let video = DB.videos.find(e => e.id === id)
         if (video) {
             video.title = title
             video.author = author
@@ -94,6 +97,7 @@ export const videosRepository = {
                 video.canBeDownloaded = canBeDownloaded
             }
             if (minAgeRestriction) {
+                //@ts-ignore
                 video.minAgeRestriction = minAgeRestriction
             }
             if (publicationDate) {

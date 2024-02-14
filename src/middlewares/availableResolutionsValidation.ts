@@ -1,5 +1,6 @@
 import {body} from "express-validator";
-import {AvailableResolutions} from "../repositories/videos-repository";
+import {AvailableResolutions} from "../db/db";
+
 
 
 export const availableResolutionsValidation =     body('availableResolutions').optional().custom((value, {req}) => {
